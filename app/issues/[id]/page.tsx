@@ -1,7 +1,8 @@
-import IssueStatusBadge from "@/app/components/IssueStatusBadge";
-import { Box, Card, Flex, Heading, Text } from "@radix-ui/themes";
+import { Box, Flex, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
-import Markdown from "react-markdown";
+import EditIssueButton from "./EditIssueButton";
+import IssueDetails from "./IssueDetails";
+import DeleteIssueButton from "./DeleteIssueButton";
 
 interface Props {
   params: { id: string };
@@ -12,16 +13,15 @@ const IssueDetailPage = async ({ params }: Props) => {
   });
   if (!issue) notFound();
   return (
-    <Box>
-      <Heading>{issue.title}</Heading>
-      <Flex gap="3" my="2">
-        <IssueStatusBadge status={issue.status} />
-        <Text>{issue.created_at.toDateString()}</Text>
+    <Grid columns={{ initial: "1", sm: "5" }} gap="5">
+      <Box className="md:col-span-4">
+        <IssueDetails issue={issue} />
+      </Box>
+      <Flex direction="column" gap="4">
+        <EditIssueButton issueId={issue.id} />
+        <DeleteIssueButton issueId={issue.id} />
       </Flex>
-      <Card className="prose" mt="4">
-        <Markdown>{issue.description}</Markdown>
-      </Card>
-    </Box>
+    </Grid>
   );
 };
 
