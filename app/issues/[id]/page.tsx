@@ -5,13 +5,13 @@ import IssueDetails from "./IssueDetails";
 import DeleteIssueButton from "./DeleteIssueButton";
 import { getServerSession } from "next-auth";
 import AssigneeSelect from "./AssigneeSelect";
-
+import prisma from "@/prisma/client";
 interface Props {
   params: { id: string };
 }
 const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession();
-  const issue = await prisma?.issue.findUnique({
+  const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id, 10) },
   });
   if (!issue) notFound();
