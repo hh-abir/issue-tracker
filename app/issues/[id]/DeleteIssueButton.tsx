@@ -31,7 +31,6 @@ const DeleteIssueButton = ({ issueId }: Props) => {
           <Button>
             <Text>Delete Issue</Text>
           </Button>
-          <Text>Wow</Text>
         </AlertDialog.Trigger>
         <AlertDialog.Content style={{ maxWidth: 450 }}>
           <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
