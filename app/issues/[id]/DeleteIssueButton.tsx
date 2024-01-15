@@ -1,6 +1,6 @@
 "use client";
 import { Spinner } from "@/app/components";
-import { AlertDialog, Button, Flex } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex, Text } from "@radix-ui/themes";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -28,7 +28,10 @@ const DeleteIssueButton = ({ issueId }: Props) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button>Delete Issue</Button>
+          <Button>
+            <Text>Delete Issue</Text>
+          </Button>
+          <Text>Wow</Text>
         </AlertDialog.Trigger>
         <AlertDialog.Content style={{ maxWidth: 450 }}>
           <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
