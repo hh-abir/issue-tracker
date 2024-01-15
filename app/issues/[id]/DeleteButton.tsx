@@ -1,33 +1,32 @@
 import React from "react";
-import * as AlertDialog from "@radix-ui/react-alert-dialog";
-import "./styles.css";
+import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 
-const AlertDialogDemo = () => (
+const DeleteButton = () => (
   <AlertDialog.Root>
-    <AlertDialog.Trigger asChild>
-      <button className="Button violet">Delete account</button>
+    <AlertDialog.Trigger>
+      <Button color="red">Revoke access</Button>
     </AlertDialog.Trigger>
-    <AlertDialog.Portal>
-      <AlertDialog.Overlay className="AlertDialogOverlay" />
-      <AlertDialog.Content className="AlertDialogContent">
-        <AlertDialog.Title className="AlertDialogTitle">
-          Are you absolutely sure?
-        </AlertDialog.Title>
-        <AlertDialog.Description className="AlertDialogDescription">
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
-        </AlertDialog.Description>
-        <div style={{ display: "flex", gap: 25, justifyContent: "flex-end" }}>
-          <AlertDialog.Cancel asChild>
-            <button className="Button mauve">Cancel</button>
-          </AlertDialog.Cancel>
-          <AlertDialog.Action asChild>
-            <button className="Button red">Yes, delete account</button>
-          </AlertDialog.Action>
-        </div>
-      </AlertDialog.Content>
-    </AlertDialog.Portal>
+    <AlertDialog.Content style={{ maxWidth: 450 }}>
+      <AlertDialog.Title>Revoke access</AlertDialog.Title>
+      <AlertDialog.Description>
+        Are you sure? This application will no longer be accessible and any
+        existing sessions will be expired.
+      </AlertDialog.Description>
+
+      <Flex gap="3" mt="4" justify="end">
+        <AlertDialog.Cancel>
+          <Button variant="soft" color="gray">
+            Cancel
+          </Button>
+        </AlertDialog.Cancel>
+        <AlertDialog.Action>
+          <Button variant="solid" color="red">
+            Revoke access
+          </Button>
+        </AlertDialog.Action>
+      </Flex>
+    </AlertDialog.Content>
   </AlertDialog.Root>
 );
 
-export default AlertDialogDemo;
+export default DeleteButton;
