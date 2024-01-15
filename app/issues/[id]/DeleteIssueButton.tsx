@@ -13,7 +13,7 @@ const DeleteIssueButton = ({ issueId }: Props) => {
 
   const [isDeleting, setDeleting] = useState(false);
 
-  const issueDelete = async () => {
+  const deleteIssue = async () => {
     try {
       setDeleting(true);
       await axios.delete("/api/issues/" + issueId);
@@ -28,32 +28,26 @@ const DeleteIssueButton = ({ issueId }: Props) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button>
-            <Text>Delete Issue</Text>
+          <Button color="red" disabled={isDeleting}>
+            Delete Issue
+            {isDeleting && <Spinner />}
           </Button>
         </AlertDialog.Trigger>
-        <AlertDialog.Content style={{ maxWidth: 450 }}>
+        <AlertDialog.Content>
           <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
-          <AlertDialog.Description size="2">
+          <AlertDialog.Description>
             Are you sure you want to delete this issue? This action cannot be
             undone.
           </AlertDialog.Description>
-
-          <Flex gap="3" mt="4" justify="end">
+          <Flex mt="4" gap="3" justify="end">
             <AlertDialog.Cancel>
               <Button variant="soft" color="gray">
                 Cancel
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button
-                disabled={isDeleting}
-                variant="solid"
-                color="red"
-                onClick={issueDelete}
-              >
+              <Button color="red" onClick={deleteIssue}>
                 Delete Issue
-                {isDeleting && <Spinner />}
               </Button>
             </AlertDialog.Action>
           </Flex>
@@ -65,11 +59,10 @@ const DeleteIssueButton = ({ issueId }: Props) => {
           <AlertDialog.Description>
             This issue could not be deleted.
           </AlertDialog.Description>
-
           <Button
-            className="float-end"
             color="gray"
             variant="soft"
+            mt="2"
             onClick={() => setError(false)}
           >
             OK
