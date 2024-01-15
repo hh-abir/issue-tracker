@@ -12,7 +12,7 @@ import {
 import { IssueStatusBadge } from "@/app/components";
 import Link from "next/link";
 const LatestIssues = async () => {
-  const issues = await prisma?.issue.findMany({
+  const issues = await prisma.issue.findMany({
     orderBy: {
       created_at: "desc",
     },
