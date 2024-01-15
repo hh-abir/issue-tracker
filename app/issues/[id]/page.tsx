@@ -6,14 +6,17 @@ import DeleteIssueButton from "./DeleteIssueButton";
 import { getServerSession } from "next-auth";
 import AssigneeSelect from "./AssigneeSelect";
 import prisma from "@/prisma/client";
+import { cache } from "react";
 interface Props {
   params: { id: string };
 }
+
+const fetchIssue = cache((issueId: number) =>
+  prisma.issue.findUnique({ where: { id: issueId } })
+);
 const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession();
-  const issue = await prisma.issue.findUnique({
-    where: { id: parseInt(params.id, 10) },
-  });
+  const issue = await fetchIssue(parseInt(params.id));
   if (!issue) notFound();
   return (
     <Grid columns={{ initial: "1", sm: "5" }} gap="5">
@@ -32,5 +35,13 @@ const IssueDetailPage = async ({ params }: Props) => {
     </Grid>
   );
 };
+
+export async function generataMetadata({ params }: Props) {
+  const issue = await fetchIssue(parseInt(params.id));
+  return {
+    title: issue?.title,
+    description: "Details of issue " + issue?.id,
+  };
+}
 
 export default IssueDetailPage;
