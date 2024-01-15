@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 
 const DeleteButton = () => (
