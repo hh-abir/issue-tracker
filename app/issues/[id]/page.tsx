@@ -36,7 +36,7 @@ const IssueDetailPage = async ({ params }: Props) => {
   );
 };
 
-export async function generataMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props) {
   const issue = await fetchIssue(parseInt(params.id));
   return {
     title: issue?.title,
